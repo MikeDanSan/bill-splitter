@@ -17,8 +17,10 @@ class Person:
         self.name = name
         self.days_in_house = days_in_house
 
-    def pay_bill(self, bill):
-        return bill.amount / 2
+    def pay_bill(self, bill, person2):
+        weight = self.days_in_house / (self.days_in_house + person2.days_in_house)
+        to_pay = bill.amount * weight
+        return to_pay
 
 
 class PdfReport:
@@ -33,8 +35,9 @@ class PdfReport:
         pass
 
 
-bill = Bill(120, "March 2021")
+the_bill = Bill(120, "March 2021")
 michael = Person("Michael", 20)
 jamie = Person("Jamie", 25)
 
-print(michael.pay_bill(bill))
+print("Michael pays: ", michael.pay_bill(bill=the_bill, person2=jamie))
+print("Jamie pays: ", jamie.pay_bill(bill=the_bill, person2=michael))
